@@ -11,4 +11,4 @@ const celebSchema = new mongoose.Schema({
   timestamps: true
 })
 
-module.exports = mongoose.model('Celeb', celebSchema)
+module.exports = mongoose.model('Celebrity', celebSchema)

@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const Celebrities = require("../models/celebrity")
+const Celebrity = require("../models/celebrity")
 const celebrities = [
     {
         name:"Tom Cruise",
         occupation:"Actor",
-        catchphrase:"Impossible n'est pas Francais",},
+        catchphrase:"Aucune mission n'est impossible",},
     {
         name:"Beyonce",
         occupation:"Singer",
@@ -16,17 +16,18 @@ const celebrities = [
 ]
 
 mongoose
-  .connect("mongodb://localhost/Celebrities")
+  .connect("mongodb://localhost/Celebrities-library")
   .then(function () {
     console.log("connected to the DB");
-    return Celebrities.deleteMany() 
+    console.log('cleaning DB')
+    return Celebrity.deleteMany() 
   })
   .catch((err) => console.log("oops connecting", err));
 
 
-Celebrities.create(celebrities)
+Celebrity.create(celebrities)
     .then(()=>{
-        console.log('celebrities added to DB')
+        console.log(`${celebrities.length} celebrities added to DB`)
         mongoose.connection.close();
     })
     .catch(err=>{
