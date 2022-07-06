@@ -17,7 +17,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/:id", (req, res, next) => {
-  Celebrities.findById()
+  Celebrities.findById(req.params.id)
     .then((CelebritiesFromDB) => {
       res.render("celebrities/show", {
         data: CelebritiesFromDB,
