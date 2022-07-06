@@ -22,15 +22,17 @@ mongoose
     console.log('cleaning DB')
     return Celebrity.deleteMany() 
   })
+  .then(function () {
+    Celebrity.create(celebrities)
+        .then(()=>{
+            console.log(`${celebrities.length} celebrities added to DB`)
+            mongoose.connection.close();
+        })
+        .catch(err=>{
+            console.log('error:',err)
+            next(err)
+        })
+  })
   .catch((err) => console.log("oops connecting", err));
 
 
-Celebrity.create(celebrities)
-    .then(()=>{
-        console.log(`${celebrities.length} celebrities added to DB`)
-        mongoose.connection.close();
-    })
-    .catch(err=>{
-        console.log('error:',err)
-        next(err)
-    })
