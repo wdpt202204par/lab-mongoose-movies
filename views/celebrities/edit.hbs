@@ -1,0 +1,23 @@
+<h2>Edit Celebrity</h2>
+
+<form action="/celebrities/edit" method="post">
+
+    <label>
+        Name: 
+        <input type="text" name="name" value="{{celebrity.name}}">
+    </label>
+    <label>
+        Occupation: 
+        <input type="text" name="occupation" value="{{celebrity.occupation}}">
+    </label>
+    <label>
+        Catchphrase: 
+        <input type="text" name="catchphrase" value="{{celebrity.catchphrase}}">
+    </label>
+
+    <button>Submit</button>
+
+</form>
+
+
+<a href="/celebrities"><p>retour</p></a>

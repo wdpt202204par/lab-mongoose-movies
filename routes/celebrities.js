@@ -71,21 +71,6 @@ router.post('/:id/delete',(req,res,next)=>{
         })
 })
 
-// router.get("/:id/remove", function (req, res, next) {
-//     Book.findByIdAndRemove(req.params.id)
-//       .then(function () {
-//         res.redirect("/books");
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//         next(err);
-//       });
-//   });
-
-
-
-
-
 router.get('/:id', (req, res, next) => {
     Celebrity.findById(req.params.id)
         .then(function (celebrityFromDB) {
@@ -98,6 +83,17 @@ router.get('/:id', (req, res, next) => {
         });
 })
 
+router.get('/:id/edit',(req,res,next)=>{
+    Celebrity.findById(req.params.id)
+        .then((celebrityFromDB)=>{
+            console.log(celebrityFromDB)
+            res.render('celebrities/edit',{celebrity:celebrityFromDB})
+        })
+        .catch((err)=>{
+            console.log('error accessing celebrity edition',err)
+            next(err)
+        })
+})
 
 
 
