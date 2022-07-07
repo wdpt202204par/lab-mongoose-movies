@@ -1,11 +1,16 @@
 <h2>Celebrities Page</h2>
-<div>
+<div class="grid">
     {{#each celebrities}}
-    <a href="/celebrities/{{_id}}"><p>{{name}}</p></a>
+    <div id="celebCard">
+    <p>{{name}}</p>
+    <div class="action">
+    <a href="/celebrities/{{_id}}"><p>View details</p></a>
     <a href="/celebrities/{{_id}}/edit"><p>Edit</p></a>
     <form action="celebrities/{{_id}}/delete" method="post"><button>Delete</button></form>
-    
+    </div>
+    </div>
     {{/each}}
 </div>
+
 
 <a href="celebrities/new">Add a new celebrity</a>

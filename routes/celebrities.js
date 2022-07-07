@@ -60,16 +60,7 @@ router.post('/new', (req, res, next) => {
 
 })
 
-router.post('/:id/delete',(req,res,next)=>{
-    Celebrity.findByIdAndRemove(req.params.id)
-        .then(()=>{
-            res.redirect('/celebrities')
-        })
-        .catch(err=>{
-            console.log('error deleting celebrity',err)
-            next(err)
-        })
-})
+
 
 router.get('/:id', (req, res, next) => {
     Celebrity.findById(req.params.id)
@@ -81,6 +72,17 @@ router.get('/:id', (req, res, next) => {
             console.log(err);
             next(err);
         });
+})
+
+router.post('/:id/delete',(req,res,next)=>{
+    Celebrity.findByIdAndRemove(req.params.id)
+        .then(()=>{
+            res.redirect('/celebrities')
+        })
+        .catch(err=>{
+            console.log('error deleting celebrity',err)
+            next(err)
+        })
 })
 
 router.get('/:id/edit',(req,res,next)=>{
@@ -95,6 +97,21 @@ router.get('/:id/edit',(req,res,next)=>{
         })
 })
 
+router.post('/:id/edit',(req,res,next)=>{
+    Celebrity.findByIdAndUpdate(req.params.id,{
+        name:req.body.name,
+        occupation:req.body.occupation,
+        catchphrase:req.body.catchphrase,
+    },
+    {new:true})
+        .then((celebrityFromDB)=>{
+            res.redirect(`/celebrities/${celebrityFromDB._id}`)
+        })
+        .catch((err)=>{
+            console.log('error editing celebrity',err)
+            next(err)
+        })
+})
 
 
 module.exports = router;
