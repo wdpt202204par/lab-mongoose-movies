@@ -22,7 +22,7 @@ const movies = [
     {
         title:"Top Gun",
         genre:"Action",
-        plot:"une jeune pilote intègre une école de pilotage",
+        plot:"un jeune pilote intègre une école de pilotage",
         cast: ["Tom Cruise", "Val Kilmer"]},
     {
         title:"Daffy Duck",
@@ -33,12 +33,21 @@ const movies = [
 
 mongoose
   .connect("mongodb://localhost/Celebrities-library")
-  .then(function () {
-    console.log("connected to the DB");
-    console.log('cleaning DB')
-    return Celebrity.deleteMany() 
-    return Movie.deleteMany()
+  .then(function() {
+    console.log('connected to the DB')
   })
+  .then(function () {
+    Celebrity.deleteMany()
+        .then(()=> {
+         console.log("celebrities cleaned");
+        })
+    })
+  .then(function() {
+    Movie.deleteMany()
+        .then(()=> {
+         console.log("movies cleaned");
+        })
+   })
   .then(function () {
     Celebrity.create(celebrities)
     Movie.create(movies)
