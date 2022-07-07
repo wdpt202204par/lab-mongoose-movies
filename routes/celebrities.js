@@ -60,8 +60,27 @@ router.post('/new', (req, res, next) => {
 
 })
 
+router.post('/:id/delete',(req,res,next)=>{
+    Celebrity.findByIdAndRemove(req.params.id)
+        .then(()=>{
+            res.redirect('/celebrities')
+        })
+        .catch(err=>{
+            console.log('error deleting celebrity',err)
+            next(err)
+        })
+})
 
-
+// router.get("/:id/remove", function (req, res, next) {
+//     Book.findByIdAndRemove(req.params.id)
+//       .then(function () {
+//         res.redirect("/books");
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//         next(err);
+//       });
+//   });
 
 
 
