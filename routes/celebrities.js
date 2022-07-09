@@ -8,13 +8,28 @@ let celebritiesData;
 router.get("/", (req, res, next) => {
   Celebrities.find()
     .then((CelebritiesFromDB) => {
-      celebritiesData = CelebritiesFromDB;
       res.render("celebrities/index", {
-        data: celebritiesData,
+        data: CelebritiesFromDB,
       });
     })
     .catch((err) => next(err));
 });
+
+router.post("/", (req, res, next) => {
+    Celebrities.create({
+        name : req.body.name,
+        occupation : req.body.occupation,
+        catchPhrase : req.body.catchPhrase,
+    })
+    .then(function() {
+        res.redirect('/celebrities')
+    })
+    .catch(err => next(err))
+})
+
+router.get("/new", (req, res, next) => {
+    res.render("celebrities/new")
+})
 
 router.get("/:id", (req, res, next) => {
   Celebrities.findById(req.params.id)
@@ -23,7 +38,6 @@ router.get("/:id", (req, res, next) => {
         data: CelebritiesFromDB,
       });
     })
-
     .catch((err) => next(err));
 });
 
