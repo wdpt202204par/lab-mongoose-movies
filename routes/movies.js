@@ -3,16 +3,6 @@ const router = express.Router();
 const Celebrities = require("../models/Celebrity.model");
 const Movies = require("../models/Movie.model");
 
-router.get("/new", (req, res, next) => {
-  Celebrities.find()
-    .then((CelebritiesFromDB) => {
-      res.render("movies/new", {
-        CelebritiesData: CelebritiesFromDB,
-      });
-    })
-    .catch((err) => next(err));
-});
-
 router.post("/", (req, res, next) => {
   Movies.create({
     title: req.body.title,
@@ -31,5 +21,27 @@ router.get("/", (req, res, next) => {
     })
     .catch((err) => next(err));
 });
+
+router.get("/new", (req, res, next) => {
+    Celebrities.find()
+      .then((CelebritiesFromDB) => {
+        res.render("movies/new", {
+          CelebritiesData: CelebritiesFromDB,
+        });
+      })
+      .catch((err) => next(err));
+  });
+
+router.get("/:id", (req, res, next) => {
+    Movies.findById(req.params.id)
+    .populate("cast")
+    .then(MovieFromDB =>{
+        console.log(MovieFromDB)
+        res.render("movies/show", {
+            MovieData : MovieFromDB
+        })
+    })
+    .catch(err => next(err))
+})
 
 module.exports = router;

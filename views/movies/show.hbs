@@ -1,0 +1,13 @@
+<h2>{{MovieData.title}}</h2>
+        <p>Genre : {{MovieData.genre}}</p>
+
+        <p>Plot : {{MovieData.plot}}</p>
+
+        Cast :
+        <p>
+            <ul>
+                {{#each MovieData.cast}}
+                    <li>{{name}}</li>
+                {{/each}}
+            </ul>
+        </p>
