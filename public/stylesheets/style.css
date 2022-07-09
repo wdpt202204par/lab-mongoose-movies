@@ -3,10 +3,49 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+bodyHomePage {width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 a {
   color: #00B7FF;
 }
 
 #celebCard{
   border:1px solid black
+}
+
+h1 {
+  color:blueS
+}
+
+#welcome {
+  font-size: 5em;
+  font-weight: bold;
+  text-align: center;
+  color: blue;
+}
+
+#categoriesBlock {
+  margin-top: 3em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+}
+
+.categories {
+  margin: 2em;
+  border: 2em;
+  border-color: blue;
+  border-radius: 20%;
+  background-color: blue;
+}
+
+.categories a {
+  font-size: 3em;
+  color: white;
+  text-decoration: none;
 }
