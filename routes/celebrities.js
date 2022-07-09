@@ -41,12 +41,34 @@ router.get("/:id", (req, res, next) => {
     .catch((err) => next(err));
 });
 
-router.post("/celebrities/:id/delete", (req, res, next) => {
+router.post("/:id", (req, res, next) => {
+  Celebrities.findByIdAndUpdate(req.params.id, {
+    name: req.body.name,
+    occupation: req.body.occupation,
+    catchPhrase: req.body.catchPhrase,
+  })
+    .then(function () {
+      res.redirect("/celebrities");
+    })
+    .catch((err) => next(err));
+})
+
+router.post("/:id/delete", (req, res, next) => {
   Celebrities.findByIdAndRemove(req.params.id)
     .then(function () {
       res.redirect("/celebrities");
     })
     .catch((err) => next(err));
 });
+
+router.get("/:id/edit", (req, res, next) => {
+  Celebrities.findById(req.params.id)
+  .then((CelebrityFromDB) => {
+    res.render('celebrities/edit', {
+      data: CelebrityFromDB
+    })
+  })
+  .catch(err => next(err))
+})
 
 module.exports = router;
