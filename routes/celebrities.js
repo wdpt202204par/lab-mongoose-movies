@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Mongoose = require("mongoose");
+//const Mongoose = require("mongoose");
 const Celebrities = require("../models/Celebrity.model");
-let celebritiesData;
 
 /* GET home page */
 router.get("/", (req, res, next) => {

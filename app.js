@@ -51,6 +51,9 @@ app.use('/', index);
 const celebrities = require('./routes/celebrities');
 app.use('/celebrities', celebrities);
 
+const movies = require('./routes/movies');
+app.use('/movies', movies);
+
 
 app.listen(process.env.PORT, function(err){
   if (err) console.log("Error in server setup")
