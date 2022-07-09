@@ -11,3 +11,7 @@
                 {{/each}}
             </ul>
         </p>
+
+          <form action="/movie/{{_id}}/delete" method="post">
+            <button type="submit" name="submit">Delete</button>
+        </form>
