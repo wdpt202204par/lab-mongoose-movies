@@ -1,0 +1,16 @@
+<h2>
+    <h3><a href="/movies/new">Create new celebrity</a></h3>
+    {{#each MoviesData}}
+        <h4><a href="/movies/{{_id}}">{{title}}</a></h4>
+
+        <form action="/movies/{{_id}}/delete" method="post">
+            <button type="submit" name="submit">Delete</button>
+        </form>
+
+        <form action="/movies/{{_id}}/edit" method="get">
+            <button>Edit</button>
+        </form>
+
+
+    {{/each}}
+</h2>
