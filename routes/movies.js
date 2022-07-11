@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Movie = require('../models/movie')
+const Celebrity=require('../models/celebrity')
 
 
 router.get('/', (req, res, next) => {
@@ -16,8 +17,17 @@ router.get('/', (req, res, next) => {
 
 })
 
-router.get('/new', (req, res, next) => { // attention car la route new est déjà utilisée par celebrity.js voir si conflit !
-    res.render('movies/new', {})
+router.get('/new', (req, res, next) => {
+    Celebrity.find()
+    .then((celebritiesFromDB)=>{
+        res.render('movies/new', {celebrities:celebritiesFromDB})
+    })
+    .catch(err=>{
+        console.log('error going to /movie/new',err)
+        next(err)
+    })
+    
+    
 })
 
 
@@ -51,6 +61,7 @@ router.post('/new', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     Movie.findById(req.params.id)
+        .populate('cast')
         .then(function (movieFromDB) {
             console.log("movieFromDB=", movieFromDB);
             res.render("movies/show", { movie: movieFromDB, });
@@ -64,10 +75,10 @@ router.get('/:id', (req, res, next) => {
 router.post('/:id/delete',(req,res,next)=>{
     Movie.findByIdAndRemove(req.params.id)
         .then(()=>{
-            res.redirect('/ùovies')
+            res.redirect('/movies')
         })
         .catch(err=>{
-            console.log('error deleting ùovie',err)
+            console.log('error deleting movie',err)
             next(err)
         })
 })
@@ -76,10 +87,24 @@ router.get('/:id/edit',(req,res,next)=>{
     Movie.findById(req.params.id)
         .then((movieFromDB)=>{
             console.log(movieFromDB)
-            res.render('movies/edit',{movie:movieFromDB})
+            Celebrity.find()
+                .then((celebritiesFromDB)=>{
+                    celebritiesFromDB.forEach((celeb)=>{
+                        if (movieFromDB.cast.includes(celeb._id)){
+                            celeb.selected = true
+                        }
+                    });
+                    res.render('movies/edit',{
+                        movie:movieFromDB,
+                        celebrities:celebritiesFromDB})
+                })
+                .catch(err=>{
+                    console.log(err)
+                    next(err)
+                })
         })
         .catch((err)=>{
-            console.log('error accessing movie edition',err)
+            console.log(err)
             next(err)
         })
 })

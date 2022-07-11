@@ -5,7 +5,7 @@ const movieSchema = new mongoose.Schema({
   title: String,
   genre: String,
   plot: String,
-  cast : [String] // je récupère le nom des célébrités en prenant le Schema Celebrity : vérifier si correct
+  cast : [{type: mongoose.Schema.Types.ObjectId, ref:'Celebrity'}] // je récupère le nom des célébrités en prenant le Schema Celebrity : vérifier si correct
 }, {
   timestamps: true
 })

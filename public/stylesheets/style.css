@@ -14,7 +14,17 @@ a {
 }
 
 #celebCard{
-  border:1px solid black
+  border:1px solid black;
+  border-radius: 2em;
+  width:10em;
+  text-align: center;
+  padding:1em;
+  margin:1em;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
 }
 
 h1 {

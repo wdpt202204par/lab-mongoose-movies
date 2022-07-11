@@ -15,8 +15,11 @@
         <input type="text" name="plot" value="{{movie.plot}}">
     </label>
     <label>
-        cast: 
-        <input type="text" name="cast" value="{{movie.cast}}">
+        <select name="cast" multiple>
+        {{#each celebrities}}
+        <option value="{{_id}}" {{#if selected}}selected{{/if}}>{{name}}</option>
+        {{/each}}
+    </select>
     </label>
 
     <button>Submit</button>
