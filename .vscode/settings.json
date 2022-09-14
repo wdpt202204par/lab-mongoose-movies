@@ -1,0 +1,9 @@
+{
+  "files.exclude": {
+    "node_modules": "explorerExcludedFiles",
+    "*.log*": "explorerExcludedFiles",
+    "package-lock.json": "explorerExcludedFiles",
+    ".env": "explorerExcludedFiles",
+    "public/stylesheets/style.css*": "explorerExcludedFiles"
+  }
+}

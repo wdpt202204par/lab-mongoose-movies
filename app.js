@@ -11,7 +11,7 @@ const path         = require('path');
 
 
 mongoose
-  .connect('mongodb://localhost/starter-code', {useNewUrlParser: true})
+  .connect('mongodb://0.0.0.0/starter-code', {useNewUrlParser: true, useUnifiedTopology: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -48,5 +48,16 @@ app.locals.title = 'Express - Generated with IronGenerator';
 const index = require('./routes/index');
 app.use('/', index);
 
+const celebrities = require('./routes/celebrities');
+app.use('/celebrities', celebrities);
+
+const movies = require('./routes/movies');
+app.use('/movies', movies);
+
+
+app.listen(process.env.PORT, function(err){
+  if (err) console.log("Error in server setup")
+  console.log("Server listening on Port", process.env.PORT);
+})
 
 module.exports = app;
