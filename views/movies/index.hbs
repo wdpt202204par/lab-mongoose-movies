@@ -1,0 +1,18 @@
+<h2>Movies Page</h2>
+<div class="grid">
+    {{#each movies}}
+    <div id="movieCard">
+    <p>{{title}}</p>
+    <div class="action">
+    <a href="/movies/{{_id}}"><p>View details</p></a>
+    <a href="/movies/{{_id}}/edit"><p>Edit</p></a>
+    <form action="movies/{{_id}}/delete" method="post"><button>Delete</button></form>
+    </div>
+    </div>
+    {{/each}}
+</div>
+
+
+<p><a href="movies/new">Add a new movie</a></p>
+<br>
+<p><a href="/">Go back to homepage</a></p>
